@@ -1,5 +1,7 @@
 package cn.edu.nju.software151250171;
 
+import java.nio.channels.Pipe.SinkChannel;
+
 public class SortExample {
 	//默认排序的数据结构都是实现了comparable接口的	
 	public static void sort(Comparable[] a){
@@ -244,4 +246,141 @@ public class SortExample {
 		quick3Way(a, gt+1, high);
 	}
 	
+	/**
+	 * 优先队列
+	 * 删除最大元素，插入元素
+	 * 上浮，下沉
+	 */
+	
+	//堆实现的优先队列
+	public class MaxPQ<Key extends Comparable<Key>>{
+		private Key[] pq;//基于堆的完全二叉树
+		private int n=0;//储存pq[1...n],pq[0]没有使用
+		
+		public MaxPQ(int maxN){
+			pq=(Key[])new Comparable[maxN+1];
+		}
+		
+		public boolean isEmpty(){
+			return n==0;
+		}
+		
+		public int size(){
+			return n;
+		}
+		
+		private boolean less(int i,int j){
+			return pq[i].compareTo(pq[j])<0;
+		}
+		
+		private void exch(int i,int j){
+			Key t=pq[i];
+			pq[i]=pq[j];
+			pq[j]=t;
+		}
+		
+		//上浮,当子节点比父节点更大时，交换父子节点，这个节点比它的两个子节点都大（一个是曾经的父节点，另一个比它更小，因为它是曾经父节点的子节点）
+		private void swim(int k){
+			while(k>1&&less(k/2, k)){
+				exch(k/2, k);
+				k=k/2;
+			}
+		}
+		
+		//下沉，父节点比它的；两个子节点或是其中一个更小，将父节点与子节点中的较大者交换
+		private void sink(int k){
+			while(2*k<=n){
+				int j=2*k;
+				if(j<n&&less(j, j+1)){
+					j++;
+				}//找较大的子节点
+				if(!less(k, j)){
+					break;
+				}
+				exch(k, j);
+				k=j;
+			}
+		}
+		
+		public void insert(Key v){
+			pq[++n]=v;
+			swim(n);
+		}
+		
+		public Key delMax(){
+			Key max=pq[1]; //从根节点获得最大元素
+			exch(1,n--);   //将其与最后一个节点交换
+			pq[n+1]=null;  //防止对象游离
+			sink(1);       //恢复堆的有序性
+			return max;
+		}
+	}
+	
+	/**
+	 * 使用优先队列的多向归并
+	 * 将多个有序的输入流归并成一个有序的输出流
+	 */
+	public static void merge(Comparable[] streams){
+	}
+	
+	/**
+	 * 堆排序
+	 * 将所有元素插入一个查找最小元素的优先队列，重复调用删除最小元素的操作来将他们按顺序删去
+	 * 堆的构造阶段，将原始数组重新组织安排进一个堆中；下沉排序阶段，从堆中按递减顺序取出所有元素并得到排序结果
+	 */
+	
+	//修改过的sink
+	private void sink(Comparable[] a,int k,int n){
+		while(2*k<=n){
+			int j=2*k;
+			if(j<n&&less(j, j+1)){
+				j++;
+			}//找较大的子节点
+			if(!less(k, j)){
+				break;
+			}
+			exch(a,k,j);
+			k=j;
+		}
+	}
+	
+	public void heapsort(Comparable[] a){
+		int n=a.length;
+		for(int k=n/2;k>=1;k--){
+			sink(a,k,n);
+		}//构造堆
+		
+		while(n>1){
+			exch(a, 1, n--);
+			sink(a,1,n);
+		}//最大元素a[1]与a[n]交换并修复堆
+	}
+	
+	//Comparator接口允许我们在一个类中实现多种排序方法
+	
+	/* 如果一个排序算法能够保留数组中重复元素的相对位置则可以被称为是稳定的
+	 * 稳定的：插入排序，归并排序
+	 * 不稳定的：选择排序，希尔排序，快速排序，堆排序
+	 * 只有在稳定性是必要情况下稳定的排序算法才有优势，事实上没有任何实际应用中常见的算法不是使用了大量额外的时间和空间才做到了稳定性
+	 */
+	
+	/*快速排序是最快的通用算法
+	 * 如果稳定性很重要而空间又不是问题，归并排序可能是最好的
+	 */
+	
+	//一些性能优先的应用的重点可能是将数字排序，因此更合理的做法是跳过引用直接将原始数据结构类型的数据排序
+	
+	/*java.util.Arrays.sort()
+	 * 每种原始数据类型都有一个不同的排序方法
+	 * 一个适用于所有实现了Comparable接口的数据类型的排序方法
+	 * 一个适用于实现了比较器Comparator的数据类型的排序方法
+	 * java系统的程序员选择对原始数据类型使用（三向切分的）快速排序，对引用类型使用归并排序
+	 * 暗示着用速度和空间（对于原始数据类型）换取稳定性（对引用类型）
+	 */
+	
+	//实现算法的一个目标就是使算法的适用性尽可能广泛，使得问题的归约更加简单
+	
+	
 }
+
+	
