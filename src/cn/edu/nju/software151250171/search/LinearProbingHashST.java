@@ -1,10 +1,5 @@
 package cn.edu.nju.software151250171.search;
 
-import java.awt.RenderingHints.Key;
-
-import javafx.scene.chart.ValueAxis;
-import javafx.scene.layout.ColumnConstraints;
-
 /*
  * 开放地址散列表
  * 
@@ -98,6 +93,10 @@ public class LinearProbingHashST <Key, Value> {
 			}
 		}
 		return null;
+	}
+	
+	public boolean contains(Key key){
+		return get(key)!=null;
 	}
 	
 	/**

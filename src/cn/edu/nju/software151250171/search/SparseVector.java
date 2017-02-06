@@ -6,10 +6,10 @@ package cn.edu.nju.software151250171.search;
  * 使用a[i].put(j,val)来表示矩阵中的值并使用a[i].get(j)来获取它
  */
 public class SparseVector {
-	private HashST<Integer, Double> st;
+	private ST<Integer, Double> st;  //本来是用HashST的
 	
 	public SparseVector(){
-		st = new HashST<Integer, Double>();
+		st = new ST<Integer, Double>();
 	}
 	
 	public int size(){
@@ -31,7 +31,7 @@ public class SparseVector {
 	
 	public double dot(double[] that){
 		double sum=0.0;
-		for(int i: st.keys(){
+		for(int i: st.keys()){
 			sum+=that[i]*this.get(i);
 		}
 		return sum;

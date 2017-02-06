@@ -2,18 +2,10 @@ package cn.edu.nju.software151250171.search;
 
 import cn.edu.nju.software151250171.base.Queue;
 
-/**
- * 基于有序数组的二分查找 有两个数组，分别存放键和值
- */
-public class BinarySearchST<Key extends Comparable<Key>, Value> {
+public class ST <Key extends Comparable<Key>,Value>{
 	private Key[] keys;
 	private Value[] vals;
 	private int N;
-
-	public BinarySearchST(int capacity) { // 调整数组大小
-		keys = (Key[]) new Comparable[capacity];
-		vals = (Value[]) new Object[capacity];
-	}
 
 	public int size() {
 		return N;
@@ -104,5 +96,9 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 			queue.enqueue(keys[rank(high)]);
 		}
 		return queue;
+	}
+	
+	public Key[] keys(){
+		return keys;
 	}
 }

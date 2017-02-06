@@ -1,5 +1,7 @@
 package cn.edu.nju.software151250171.search;
 
+import cn.edu.nju.software151250171.base.Queue;
+
 /**
  * 索引及反向索引的查找
  * 这段数据驱动的符号表用例会从一个文件中读取键值对并根据标准输入中的键打印出相应的值
