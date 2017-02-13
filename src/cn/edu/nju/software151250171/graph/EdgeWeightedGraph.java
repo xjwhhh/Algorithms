@@ -46,14 +46,14 @@ public class EdgeWeightedGraph {
 	
 	//图的所有边
 	public Iterable<Edge> edges(){
-		Bag<Edge> b=new Bag<Edge>();
+		Bag<Edge> bag=new Bag<Edge>();
 		for(int v=0;v<V;v++){
 			for(Edge e:adj[v]){
 				if(e.other(v)>v){
-					b.add(e);
+					bag.add(e);
 				}
 			}
 		}
-		return b;
+		return bag;
 	}
 }
