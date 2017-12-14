@@ -1,5 +1,7 @@
 package cn.edu.nju.software151250171.search;
 
+import cn.edu.nju.software151250171.search.symboltables.ST;
+
 /*
  * 矩阵与向量的乘法，计算所需空间非常巨大
  * 幸好，矩阵通常是稀疏的，可以将矩阵表示为由稀疏向量组成的一个数组

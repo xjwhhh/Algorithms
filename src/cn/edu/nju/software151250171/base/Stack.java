@@ -1,8 +1,7 @@
 package cn.edu.nju.software151250171.base;
 
 import java.util.Iterator;
-
-import javafx.scene.Node;
+import java.util.NoSuchElementException;
 
 public class Stack <Item> implements Iterable<Item>{
 	private Node first;  //栈顶，最近添加的元素
@@ -38,6 +37,12 @@ public class Stack <Item> implements Iterable<Item>{
 		N--;
 		return item;
 	}
+
+	//返回栈中最近添加的元素
+	public Item peek(){
+        if (isEmpty()) throw new NoSuchElementException("Stack underflow");
+	    return first.item;
+    }
 
 	@Override
 	public Iterator<Item> iterator() {
