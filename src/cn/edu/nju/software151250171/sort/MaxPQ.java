@@ -41,7 +41,7 @@ public class MaxPQ<Key extends Comparable<Key>>{
 		}
 	}
 	
-	//下沉，父节点比它的；两个子节点或是其中一个更小，将父节点与子节点中的较大者交换
+	//下沉，父节点比它的两个子节点或是其中一个更小，将父节点与子节点中的较大者交换
 	private void sink(int k){
 		while(2*k<=n){
 			int j=2*k;
