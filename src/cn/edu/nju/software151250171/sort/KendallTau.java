@@ -27,7 +27,6 @@ public class KendallTau {
         return Inversions.count(bnew);
     }
 
-
     // return a random permutation of size n
     public static int[] permutation(int n) {
         int[] a = new int[n];
@@ -37,14 +36,12 @@ public class KendallTau {
         return a;
     }
 
-
     public static void main(String[] args) {
 
         // two random permutation of size n
         int n = Integer.parseInt(args[0]);
         int[] a = KendallTau.permutation(n);
         int[] b = KendallTau.permutation(n);
-
 
         // print initial permutation
         for (int i = 0; i < n; i++)

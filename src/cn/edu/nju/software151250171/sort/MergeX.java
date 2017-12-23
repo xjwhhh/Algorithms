@@ -1,6 +1,7 @@
 package cn.edu.nju.software151250171.sort;
 
 import java.util.Comparator;
+
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdIn;
 
@@ -13,20 +14,21 @@ public class MergeX {
     private static final int CUTOFF = 7;  // cutoff to insertion sort
 
     // This class should not be instantiated.
-    private MergeX() { }
+    private MergeX() {
+    }
 
     private static void merge(Comparable[] src, Comparable[] dst, int lo, int mid, int hi) {
 
         // precondition: src[lo .. mid] and src[mid+1 .. hi] are sorted subarrays
         assert isSorted(src, lo, mid);
-        assert isSorted(src, mid+1, hi);
+        assert isSorted(src, mid + 1, hi);
 
-        int i = lo, j = mid+1;
+        int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            if      (i > mid)              dst[k] = src[j++];
-            else if (j > hi)               dst[k] = src[i++];
+            if (i > mid) dst[k] = src[j++];
+            else if (j > hi) dst[k] = src[i++];
             else if (less(src[j], src[i])) dst[k] = src[j++];   // to ensure stability
-            else                           dst[k] = src[i++];
+            else dst[k] = src[i++];
         }
 
         // postcondition: dst[lo .. hi] is sorted subarray
@@ -41,7 +43,7 @@ public class MergeX {
         }
         int mid = lo + (hi - lo) / 2;
         sort(dst, src, lo, mid);
-        sort(dst, src, mid+1, hi);
+        sort(dst, src, mid + 1, hi);
 
         // if (!less(src[mid+1], src[mid])) {
         //    for (int i = lo; i <= hi; i++) dst[i] = src[i];
@@ -49,7 +51,7 @@ public class MergeX {
         // }
 
         // using System.arraycopy() is a bit faster than the above loop
-        if (!less(src[mid+1], src[mid])) {
+        if (!less(src[mid + 1], src[mid])) {
             System.arraycopy(src, lo, dst, lo, hi - lo + 1);
             return;
         }
@@ -59,21 +61,21 @@ public class MergeX {
 
     /**
      * Rearranges the array in ascending order, using the natural order.
+     *
      * @param a the array to be sorted
      */
     public static void sort(Comparable[] a) {
         Comparable[] aux = a.clone();
-        sort(aux, a, 0, a.length-1);
+        sort(aux, a, 0, a.length - 1);
         assert isSorted(a);
     }
 
     // sort from a[lo] to a[hi] using insertion sort
     private static void insertionSort(Comparable[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++)
-            for (int j = i; j > lo && less(a[j], a[j-1]); j--)
-                exch(a, j, j-1);
+            for (int j = i; j > lo && less(a[j], a[j - 1]); j--)
+                exch(a, j, j - 1);
     }
-
 
     /*******************************************************************
      *  Utility methods.
@@ -96,7 +98,6 @@ public class MergeX {
         return comparator.compare(a, b) < 0;
     }
 
-
     /*******************************************************************
      *  Version that takes Comparator as argument.
      *******************************************************************/
@@ -104,12 +105,12 @@ public class MergeX {
     /**
      * Rearranges the array in ascending order, using the provided order.
      *
-     * @param a the array to be sorted
+     * @param a          the array to be sorted
      * @param comparator the comparator that defines the total order
      */
     public static void sort(Object[] a, Comparator comparator) {
         Object[] aux = a.clone();
-        sort(aux, a, 0, a.length-1, comparator);
+        sort(aux, a, 0, a.length - 1, comparator);
         assert isSorted(a, comparator);
     }
 
@@ -117,20 +118,19 @@ public class MergeX {
 
         // precondition: src[lo .. mid] and src[mid+1 .. hi] are sorted subarrays
         assert isSorted(src, lo, mid, comparator);
-        assert isSorted(src, mid+1, hi, comparator);
+        assert isSorted(src, mid + 1, hi, comparator);
 
-        int i = lo, j = mid+1;
+        int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            if      (i > mid)                          dst[k] = src[j++];
-            else if (j > hi)                           dst[k] = src[i++];
+            if (i > mid) dst[k] = src[j++];
+            else if (j > hi) dst[k] = src[i++];
             else if (less(src[j], src[i], comparator)) dst[k] = src[j++];
-            else                                       dst[k] = src[i++];
+            else dst[k] = src[i++];
         }
 
         // postcondition: dst[lo .. hi] is sorted subarray
         assert isSorted(dst, lo, hi, comparator);
     }
-
 
     private static void sort(Object[] src, Object[] dst, int lo, int hi, Comparator comparator) {
         // if (hi <= lo) return;
@@ -140,10 +140,10 @@ public class MergeX {
         }
         int mid = lo + (hi - lo) / 2;
         sort(dst, src, lo, mid, comparator);
-        sort(dst, src, mid+1, hi, comparator);
+        sort(dst, src, mid + 1, hi, comparator);
 
         // using System.arraycopy() is a bit faster than the above loop
-        if (!less(src[mid+1], src[mid], comparator)) {
+        if (!less(src[mid + 1], src[mid], comparator)) {
             System.arraycopy(src, lo, dst, lo, hi - lo + 1);
             return;
         }
@@ -154,10 +154,9 @@ public class MergeX {
     // sort from a[lo] to a[hi] using insertion sort
     private static void insertionSort(Object[] a, int lo, int hi, Comparator comparator) {
         for (int i = lo; i <= hi; i++)
-            for (int j = i; j > lo && less(a[j], a[j-1], comparator); j--)
-                exch(a, j, j-1);
+            for (int j = i; j > lo && less(a[j], a[j - 1], comparator); j--)
+                exch(a, j, j - 1);
     }
-
 
     /***************************************************************************
      *  Check if array is sorted - useful for debugging.
@@ -168,7 +167,7 @@ public class MergeX {
 
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
         for (int i = lo + 1; i <= hi; i++)
-            if (less(a[i], a[i-1])) return false;
+            if (less(a[i], a[i - 1])) return false;
         return true;
     }
 
@@ -178,7 +177,7 @@ public class MergeX {
 
     private static boolean isSorted(Object[] a, int lo, int hi, Comparator comparator) {
         for (int i = lo + 1; i <= hi; i++)
-            if (less(a[i], a[i-1], comparator)) return false;
+            if (less(a[i], a[i - 1], comparator)) return false;
         return true;
     }
 

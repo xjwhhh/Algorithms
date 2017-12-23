@@ -4,10 +4,11 @@ import edu.princeton.cs.algs4.StdOut;
 
 /**
  * 稳定的优先队列，将重复的元素按照它们被插入的顺序返回
+ *
  * @param <Key>
  */
 public class StableMinPQ<Key extends Comparable<Key>> {
-    private Key[]  pq;                   // store element at indices 1 to N
+    private Key[] pq;                   // store element at indices 1 to N
     private long[] time;                 // timestamp
     private int n;                       // number of elements on priority queue
     private long timestamp = 1;          // timestamp for when item was inserted
@@ -23,7 +24,6 @@ public class StableMinPQ<Key extends Comparable<Key>> {
     public StableMinPQ() {
         this(1);
     }
-
 
     // Is the priority queue empty?
     public boolean isEmpty() {
@@ -44,13 +44,13 @@ public class StableMinPQ<Key extends Comparable<Key>> {
     // helper function to double the size of the heap array
     private void resize(int capacity) {
         assert capacity > n;
-        Key[]  tempPQ   = (Key[]) new Comparable[capacity];
+        Key[] tempPQ = (Key[]) new Comparable[capacity];
         long[] tempTime = new long[capacity];
         for (int i = 1; i <= n; i++)
             tempPQ[i] = pq[i];
         for (int i = 1; i <= n; i++)
             tempTime[i] = time[i];
-        pq   = tempPQ;
+        pq = tempPQ;
         time = tempTime;
     }
 
@@ -73,29 +73,28 @@ public class StableMinPQ<Key extends Comparable<Key>> {
         exch(1, n);
         Key min = pq[n--];
         sink(1);
-        pq[n+1] = null;         // avoid loitering and help with garbage collection
-        time[n+1] = 0;
-        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length  / 2);
+        pq[n + 1] = null;         // avoid loitering and help with garbage collection
+        time[n + 1] = 0;
+        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
         assert isMinHeap();
         return min;
     }
-
 
     /***************************************************************************
      * Helper functions to restore the heap invariant.
      ***************************************************************************/
 
     private void swim(int k) {
-        while (k > 1 && greater(k/2, k)) {
-            exch(k, k/2);
-            k = k/2;
+        while (k > 1 && greater(k / 2, k)) {
+            exch(k, k / 2);
+            k = k / 2;
         }
     }
 
     private void sink(int k) {
-        while (2*k <= n) {
-            int j = 2*k;
-            if (j < n && greater(j, j+1)) j++;
+        while (2 * k <= n) {
+            int j = 2 * k;
+            if (j < n && greater(j, j + 1)) j++;
             if (!greater(k, j)) break;
             exch(k, j);
             k = j;
@@ -129,12 +128,11 @@ public class StableMinPQ<Key extends Comparable<Key>> {
     // is subtree of pq[1..n] rooted at k a min heap?
     private boolean isMinHeap(int k) {
         if (k > n) return true;
-        int left = 2*k, right = 2*k + 1;
-        if (left  <= n && greater(k, left))  return false;
+        int left = 2 * k, right = 2 * k + 1;
+        if (left <= n && greater(k, left)) return false;
         if (right <= n && greater(k, right)) return false;
         return isMinHeap(left) && isMinHeap(right);
     }
-
 
     private static final class Tuple implements Comparable<Tuple> {
         private String name;
@@ -168,7 +166,6 @@ public class StableMinPQ<Key extends Comparable<Key>> {
         for (int i = 0; i < strings.length; i++) {
             pq.insert(new Tuple(strings[i], i));
         }
-
 
         // delete and print each key
         while (!pq.isEmpty()) {

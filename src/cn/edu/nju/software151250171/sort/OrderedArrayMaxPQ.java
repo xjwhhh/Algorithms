@@ -12,23 +12,28 @@ public class OrderedArrayMaxPQ<Key extends Comparable<Key>> {
         n = 0;
     }
 
+    public boolean isEmpty() {
+        return n == 0;
+    }
 
-    public boolean isEmpty() { return n == 0;  }
-    public int size()        { return n;       }
-    public Key delMax()      { return pq[--n]; }
+    public int size() {
+        return n;
+    }
+
+    public Key delMax() {
+        return pq[--n];
+    }
 
     //从最后开始找适合插入的位置，将所有较大的元素向右移动一格以使数组保持有序
     public void insert(Key key) {
-        int i = n-1;
+        int i = n - 1;
         while (i >= 0 && less(key, pq[i])) {
-            pq[i+1] = pq[i];
+            pq[i + 1] = pq[i];
             i--;
         }
-        pq[i+1] = key;
+        pq[i + 1] = key;
         n++;
     }
-
-
 
     /***************************************************************************
      * Helper functions.

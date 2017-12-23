@@ -10,7 +10,7 @@ public class EvaluatePostfix {
 
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
-            if      (s.equals("+")) stack.push(stack.pop() + stack.pop());
+            if (s.equals("+")) stack.push(stack.pop() + stack.pop());
             else if (s.equals("*")) stack.push(stack.pop() * stack.pop());
             else stack.push(Integer.parseInt(s));
         }

@@ -1,6 +1,5 @@
 package cn.edu.nju.software151250171.sort;
 
-
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -12,19 +11,18 @@ public class California {
 
     private static class CandidateComparator implements Comparator<String> {
         private static String order = "RWQOJMVAHBSGZXNTCIEKUPDYFL";
+
         public int compare(String a, String b) {
             int n = Math.min(a.length(), b.length());
             for (int i = 0; i < n; i++) {
                 int aindex = order.indexOf(a.charAt(i));
                 int bindex = order.indexOf(b.charAt(i));
-                if      (aindex < bindex) return -1;
+                if (aindex < bindex) return -1;
                 else if (aindex > bindex) return +1;
             }
             return a.length() - b.length();
         }
     }
-
-
 
     // test client
     public static void main(String[] args) {

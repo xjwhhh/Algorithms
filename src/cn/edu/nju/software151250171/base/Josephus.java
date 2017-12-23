@@ -19,7 +19,7 @@ public class Josephus {
             queue.enqueue(i);
 
         while (!queue.isEmpty()) {
-            for (int i = 0; i < m-1; i++)
+            for (int i = 0; i < m - 1; i++)
                 queue.enqueue(queue.dequeue());
             StdOut.print(queue.dequeue() + " ");
         }

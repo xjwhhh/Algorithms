@@ -8,34 +8,33 @@ import cn.edu.nju.software151250171.search.symboltables.ST;
  * 使用a[i].put(j,val)来表示矩阵中的值并使用a[i].get(j)来获取它
  */
 public class SparseVector {
-	private ST<Integer, Double> st;  //本来是用HashST的
-	
-	public SparseVector(){
-		st = new ST<Integer, Double>();
-	}
-	
-	public int size(){
-		return st.size();
-	}
-	
-	public void put(int i, double x){
-		st.put(i,x);
-	}
-	
-	public double get(int i){
-		if(!st.contains(i)){
-			return 0.0;
-		}
-		else{
-			return st.get(i);
-		}
-	}
-	
-	public double dot(double[] that){
-		double sum=0.0;
-		for(int i: st.keys()){
-			sum+=that[i]*this.get(i);
-		}
-		return sum;
-	}
+    private ST<Integer, Double> st;  //本来是用HashST的
+
+    public SparseVector() {
+        st = new ST<Integer, Double>();
+    }
+
+    public int size() {
+        return st.size();
+    }
+
+    public void put(int i, double x) {
+        st.put(i, x);
+    }
+
+    public double get(int i) {
+        if (!st.contains(i)) {
+            return 0.0;
+        } else {
+            return st.get(i);
+        }
+    }
+
+    public double dot(double[] that) {
+        double sum = 0.0;
+        for (int i : st.keys()) {
+            sum += that[i] * this.get(i);
+        }
+        return sum;
+    }
 }

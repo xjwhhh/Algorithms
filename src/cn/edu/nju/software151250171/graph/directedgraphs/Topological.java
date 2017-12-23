@@ -6,25 +6,25 @@ package cn.edu.nju.software151250171.graph.directedgraphs;
  * 在实际应用中，拓扑排序和有向环的检测总是会一起出现，因为有向环的检测是排序的前提
  */
 public class Topological {
-	private Iterable<Integer> order;
-	
-	public Topological(Digraph G){
-		DirectedCycle cyclefinder=new DirectedCycle(G);
-		if(!cyclefinder.hasCycle()){
-			DepthFirstOrder depthFirstOrder=new DepthFirstOrder(G);
-			order=depthFirstOrder.reversePost();
-		}
-	}
-	
-	//拓扑排序的所有顶点
-	public Iterable<Integer> order(){
-		return order;
-	}
-	
-	//G是有向无环图吗
-	public boolean isDAG(){
-		return order!=null;
-	}
+    private Iterable<Integer> order;
+
+    public Topological(Digraph G) {
+        DirectedCycle cyclefinder = new DirectedCycle(G);
+        if (!cyclefinder.hasCycle()) {
+            DepthFirstOrder depthFirstOrder = new DepthFirstOrder(G);
+            order = depthFirstOrder.reversePost();
+        }
+    }
+
+    //拓扑排序的所有顶点
+    public Iterable<Integer> order() {
+        return order;
+    }
+
+    //G是有向无环图吗
+    public boolean isDAG() {
+        return order != null;
+    }
 }
 
 /* 解决任务调度通常需要以下三步：

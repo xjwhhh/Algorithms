@@ -12,20 +12,27 @@ public class UnorderedArrayMaxPQ<Key extends Comparable<Key>> {
         n = 0;
     }
 
-    public boolean isEmpty()   { return n == 0; }
-    public int size()          { return n;      }
-    public void insert(Key x)  { pq[n++] = x;   }
+    public boolean isEmpty() {
+        return n == 0;
+    }
+
+    public int size() {
+        return n;
+    }
+
+    public void insert(Key x) {
+        pq[n++] = x;
+    }
 
     //将最大元素和边界元素交换然后删除它
     public Key delMax() {
         int max = 0;
         for (int i = 1; i < n; i++)
             if (less(max, i)) max = i;
-        exch(max, n-1);
+        exch(max, n - 1);
 
         return pq[--n];
     }
-
 
     /***************************************************************************
      * Helper functions.
@@ -39,7 +46,6 @@ public class UnorderedArrayMaxPQ<Key extends Comparable<Key>> {
         pq[i] = pq[j];
         pq[j] = swap;
     }
-
 
     /***************************************************************************
      * Test routine.

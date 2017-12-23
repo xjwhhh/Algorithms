@@ -18,8 +18,8 @@ public class QuickBest {
 
         if (hi <= lo) return;
         int mid = lo + (hi - lo) / 2;
-        best(a, lo, mid-1);
-        best(a, mid+1, hi);
+        best(a, lo, mid - 1);
+        best(a, mid + 1, hi);
         exch(a, lo, mid);
     }
 
@@ -27,7 +27,7 @@ public class QuickBest {
         int[] a = new int[n];
         for (int i = 0; i < n; i++)
             a[i] = i;
-        best(a, 0, n-1);
+        best(a, 0, n - 1);
         return a;
     }
 
@@ -37,7 +37,6 @@ public class QuickBest {
         a[i] = a[j];
         a[j] = swap;
     }
-
 
     public static void main(String[] args) {
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

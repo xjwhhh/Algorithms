@@ -10,7 +10,6 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
     private int first;      // index of first element of queue
     private int last;       // index of next available slot
 
-
     /**
      * Initializes an empty queue.
      */
@@ -23,6 +22,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
 
     /**
      * Is this queue empty?
+     *
      * @return true if this queue is empty; false otherwise
      */
     public boolean isEmpty() {
@@ -31,6 +31,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
 
     /**
      * Returns the number of items in this queue.
+     *
      * @return the number of items in this queue
      */
     public int size() {
@@ -46,16 +47,17 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         }
         q = temp;
         first = 0;
-        last  = n;
+        last = n;
     }
 
     /**
      * Adds the item to this queue.
+     *
      * @param item the item to add
      */
     public void enqueue(Item item) {
         // double size of array if necessary and recopy to front of array
-        if (n == q.length) resize(2*q.length);   // double size of array if necessary
+        if (n == q.length) resize(2 * q.length);   // double size of array if necessary
         q[last++] = item;                        // add item
         if (last == q.length) last = 0;          // wrap-around
         n++;
@@ -63,6 +65,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
 
     /**
      * Removes and returns the item on this queue that was least recently added.
+     *
      * @return the item on this queue that was least recently added
      * @throws java.util.NoSuchElementException if this queue is empty
      */
@@ -74,12 +77,13 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         first++;
         if (first == q.length) first = 0;           // wrap-around
         // shrink size of array if necessary
-        if (n > 0 && n == q.length/4) resize(q.length/2);
+        if (n > 0 && n == q.length / 4) resize(q.length / 2);
         return item;
     }
 
     /**
      * Returns the item least recently added to this queue.
+     *
      * @return the item least recently added to this queue
      * @throws java.util.NoSuchElementException if this queue is empty
      */
@@ -88,9 +92,9 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         return q[first];
     }
 
-
     /**
      * Returns an iterator that iterates over the items in this queue in FIFO order.
+     *
      * @return an iterator that iterates over the items in this queue in FIFO order
      */
     public Iterator<Item> iterator() {
@@ -100,8 +104,14 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
     // an iterator, doesn't implement remove() since it's optional
     private class ArrayIterator implements Iterator<Item> {
         private int i = 0;
-        public boolean hasNext()  { return i < n;                               }
-        public void remove()      { throw new UnsupportedOperationException();  }
+
+        public boolean hasNext() {
+            return i < n;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
 
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();

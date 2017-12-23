@@ -1,4 +1,5 @@
 package cn.edu.nju.software151250171.sort;
+
 import edu.princeton.cs.algs4.StdOut;
 
 /**
@@ -12,9 +13,9 @@ public class Sort2distinct {
         int i = 0;
         while (i <= gt) {
             int cmp = a[i].compareTo(a[lt]);
-            if      (cmp < 0) exch(a, lt++, i++);
+            if (cmp < 0) exch(a, lt++, i++);
             else if (cmp > 0) exch(a, i, gt--);
-            else              i++;
+            else i++;
         }
     }
 
@@ -33,7 +34,7 @@ public class Sort2distinct {
         int n = s.length();
         String[] a = new String[n];
         for (int i = 0; i < n; i++)
-            a[i] = s.substring(i, i+1);
+            a[i] = s.substring(i, i + 1);
 
         // sort a print results
         sort(a);

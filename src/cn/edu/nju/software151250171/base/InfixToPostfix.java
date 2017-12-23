@@ -9,11 +9,11 @@ public class InfixToPostfix {
         Stack<String> stack = new Stack<String>();
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
-            if      (s.equals("+")) stack.push(s);
+            if (s.equals("+")) stack.push(s);
             else if (s.equals("*")) stack.push(s);
             else if (s.equals(")")) StdOut.print(stack.pop() + " ");
             else if (s.equals("(")) StdOut.print("");
-            else                    StdOut.print(s + " ");
+            else StdOut.print(s + " ");
         }
         StdOut.println();
     }
