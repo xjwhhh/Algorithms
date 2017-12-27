@@ -1,5 +1,6 @@
 package cn.edu.nju.software151250171.search.hashtables;
 
+import cn.edu.nju.software151250171.base.Queue;
 import cn.edu.nju.software151250171.search.symboltables.SequentialSearchST;
 
 /*
@@ -21,6 +22,7 @@ import cn.edu.nju.software151250171.search.symboltables.SequentialSearchST;
 
 //基于拉链法的散列表
 public class SeparateChainingHashST<Key, Value> {
+    private static final int INIT_CAPACITY = 4;
     private int N;  //键值对总数
     private int M;  //散列表大小
     private SequentialSearchST<Key, Value>[] st;  //存放链表对象的数组
@@ -50,12 +52,40 @@ public class SeparateChainingHashST<Key, Value> {
         st[hash(key)].put(key, value);
     }
 
-//	public Iterable<Key> keys(){
-//		
-//	}
+    public Iterable<Key> keys() {
+        Queue<Key> queue = new Queue<Key>();
+        for (int i = 0; i < M; i++) {
+            for (Key key : st[i].keys())
+                queue.enqueue(key);
+        }
+        return queue;
+    }
+
+    private void resize(int chains) {
+        SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST<Key, Value>(chains);
+        for (int i = 0; i < M; i++) {
+            for (Key key : st[i].keys()) {
+                temp.put(key, st[i].get(key));
+            }
+        }
+        this.M = temp.M;
+        this.N = temp.N;
+        this.st = temp.st;
+    }
 
     /*
      * 要删除一个键值对，先用散列值找到含有该键的SequentialSearchST对象，然后调用该对象的delete()方法
      */
+
+    public void delete(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to delete() is null");
+
+        int i = hash(key);
+        if (st[i].contains(key)) N--;
+        st[i].delete(key);
+
+        // halve table size if average length of list <= 2
+        if (M > INIT_CAPACITY && N <= 2 * M) resize(M / 2);
+    }
 
 }

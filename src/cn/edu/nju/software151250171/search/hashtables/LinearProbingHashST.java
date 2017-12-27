@@ -12,6 +12,8 @@ package cn.edu.nju.software151250171.search.hashtables;
  * 在实现中使用了并行数组，一条保存键，一条保存值
  */
 
+import cn.edu.nju.software151250171.base.Queue;
+
 //基于线性探测的符号表
 public class LinearProbingHashST<Key, Value> {
     private int N;              //符号表中键值对的总数
@@ -136,6 +138,13 @@ public class LinearProbingHashST<Key, Value> {
         if (N > 0 && N == M / 8) {
             resize(M / 2);
         }
+    }
+
+    public Iterable<Key> keys() {
+        Queue<Key> queue = new Queue<Key>();
+        for (int i = 0; i < M; i++)
+            if (keys[i] != null) queue.enqueue(keys[i]);
+        return queue;
     }
 
 
