@@ -1,6 +1,8 @@
 package cn.edu.nju.software151250171.graph.undirectedgraphs;
 
 import cn.edu.nju.software151250171.base.Bag;
+import cn.edu.nju.software151250171.base.Stack;
+import edu.princeton.cs.algs4.In;
 
 /*
  * Graph数据类型
@@ -20,15 +22,31 @@ public class Graph {
         }
     }
 
-//	public Graph(In in){
-//		this(in.readInt());      //读取V并将图初始化
-//		int E=in.readInt();      //读取E
-//		for(int i=0;i<E;i++){    //添加一条边
-//			int v=in.readInt();  //读取一个顶点
-//			int w=in.readInt();  //读取另一个顶点
-//			addEdge(v,w);        //添加一条连接它们的边
-//		}
-//	}
+    public Graph(In in) {
+        this(in.readInt());      //读取V并将图初始化
+        int E = in.readInt();      //读取E
+        for (int i = 0; i < E; i++) {    //添加一条边
+            int v = in.readInt();  //读取一个顶点
+            int w = in.readInt();  //读取另一个顶点
+            addEdge(v, w);        //添加一条连接它们的边
+        }
+    }
+
+    //接受一幅图G然后创建并初始化这幅图的一个副本，G的用例对它做出的任何改动都不影响它的副本
+    public Graph(Graph G) {
+        this(G.V());
+        this.E = G.E();
+        for (int v = 0; v < G.V(); v++) {
+            // reverse so that adjacency list is in same order as original
+            Stack<Integer> reverse = new Stack<Integer>();
+            for (int w : G.adj[v]) {
+                reverse.push(w);
+            }
+            for (int w : reverse) {
+                adj[v].add(w);
+            }
+        }
+    }
 
     public int V() {
         return V;
