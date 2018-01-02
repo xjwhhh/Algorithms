@@ -3,6 +3,7 @@ package cn.edu.nju.software151250171.graph.directedgraphs;
 /*
  * 有向图的可达性
  * 是否存在一条从s到达给定顶点v的有向路径
+ * 这份深度优先搜索的实现使得用例能够判断从给定的一个或者一组顶点能够到达哪些其他顶点
  */
 public class DirectedDFS {
     private boolean[] marked;

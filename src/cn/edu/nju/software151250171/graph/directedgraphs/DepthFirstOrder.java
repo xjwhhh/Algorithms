@@ -14,9 +14,9 @@ public class DepthFirstOrder {
     private Stack<Integer> reversePost;   //所有顶点的逆后序排列，在递归调用之后将顶点压入栈
 
     public DepthFirstOrder(Digraph G) {
-        pre = new Queue<Integer>();
-        post = new Queue<Integer>();
-        reversePost = new Stack<Integer>();
+        pre = new Queue<>();
+        post = new Queue<>();
+        reversePost = new Stack<>();
         marked = new boolean[G.V()];
 
         for (int v = 0; v < G.V(); v++) {
