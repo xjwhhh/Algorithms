@@ -1,6 +1,7 @@
 package cn.edu.nju.software151250171.graph.directedgraphs;
 
 import cn.edu.nju.software151250171.base.Bag;
+import cn.edu.nju.software151250171.base.Stack;
 import edu.princeton.cs.algs4.In;
 
 /*
@@ -11,6 +12,7 @@ public class Digraph {
     private int V; // 顶点数目
     private int E; // 边的数目
     private Bag<Integer>[] adj; // 邻接表
+    private int[] indegree;//入度
 
     public Digraph(int V) {
         this.V = V;
@@ -30,6 +32,23 @@ public class Digraph {
 			addEdge(v, w); // 添加一条连接它们的边
 		}
 	}
+
+    public Digraph(Digraph G) {
+        this(G.V());
+        this.E = G.E();
+        for (int v = 0; v < V; v++)
+            this.indegree[v] = G.indegree[v];
+        for (int v = 0; v < G.V(); v++) {
+            // reverse so that adjacency list is in same order as original
+            Stack<Integer> reverse = new Stack<Integer>();
+            for (int w : G.adj[v]) {
+                reverse.push(w);
+            }
+            for (int w : reverse) {
+                adj[v].add(w);
+            }
+        }
+    }
 
     public int V() {
         return V;
