@@ -32,6 +32,7 @@ public class Edge implements Comparable<Edge> {
         }
     }
 
+    //比较权重
     public int compareTo(Edge that) {
         if (this.weight() < that.weight) {
             return -1;

@@ -3,23 +3,24 @@ package cn.edu.nju.software151250171.graph.minimumspanningtrees;
 import cn.edu.nju.software151250171.base.Queue;
 import cn.edu.nju.software151250171.sort.MinPQ;
 
-/*
+/**
  * Prim算法
  * 它的每一步都会为一棵生长中的树添加一条边。一开始这个树只有一个顶点，然后会向它添加V-1条边
  * 每次总是将下一条连接树中的顶点与不在树中的顶点且权重最小的边加入树中，即由树中的顶点所定义
  * 的切分中的一条横切边
  * 这种Prim算法的延时实现使用了一条优先队列来保存所有的横切边，一个由顶点索引的数组来标记树的
- * 顶点以及一条队列来保存最小生成树的边，这种延时实现会在优先队列中保留失效的边
+ * 顶点以及一条队列来保存最小生成树的边，这种延时实现会在优先队列中保留失效（两个顶点都在树中）的边
  */
 public class LazyPrimMST {
     private boolean[] marked;    //最小生成树的顶点
     private Queue<Edge> mst;     //最小生成树的边
     private MinPQ<Edge> pq;      //横切边（包括失效的边）
+    private double weight;
 
     public LazyPrimMST(EdgeWeightedGraph G) {
-        pq = new MinPQ<Edge>();
+        pq = new MinPQ<>();
         marked = new boolean[G.V()];
-        mst = new Queue<Edge>();
+        mst = new Queue<>();
 
         visit(G, 0);             //假设G是连通的
         while (!pq.isEmpty()) {
@@ -31,6 +32,7 @@ public class LazyPrimMST {
                 continue;         //跳过失效的边
             }
             mst.enqueue(e);      //将边添加到树中
+            weight += e.weight();//添加权重
             if (!marked[v]) {      //将顶点添加到树中
                 visit(G, v);
             }
@@ -54,6 +56,7 @@ public class LazyPrimMST {
         return mst;
     }
 
-//	public double weight(){		
-//	}
+    public double weight() {
+        return weight;
+    }
 }
