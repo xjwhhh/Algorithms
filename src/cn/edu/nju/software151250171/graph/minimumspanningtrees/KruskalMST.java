@@ -13,6 +13,7 @@ import cn.edu.nju.software151250171.sort.MinPQ;
  */
 public class KruskalMST {
     private Queue<Edge> mst;
+    private double weight;
 
     public KruskalMST(EdgeWeightedGraph G) {
         mst = new Queue<Edge>();
@@ -31,6 +32,7 @@ public class KruskalMST {
             }
             uf.union(v, w);              //合并分量
             mst.enqueue(e);             //将边添加到最小生成树中
+            weight += e.weight();
         }
     }
 
@@ -38,6 +40,9 @@ public class KruskalMST {
         return mst;
     }
 
-//	public double weight()
+    public double weight() {
+        return weight;
+    }
+
 
 }
