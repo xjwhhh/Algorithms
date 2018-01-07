@@ -2,6 +2,8 @@ package cn.edu.nju.software151250171.graph.shortestpaths;
 
 import cn.edu.nju.software151250171.base.Bag;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType.NEWLINE;
+
 /*
  * 加权有向图的数据类型
  * 维护了一个由顶点索引的Bag对象的数组，Bag对象的内容为DirectedEdge对象
@@ -32,7 +34,7 @@ public class EdgeWeightedDigraph {
         return E;
     }
 
-    //向图中添加一条边e，每条边都会出现两次，在两个顶点的邻接表中
+    //向图中添加一条边e,每条边只会出现一次
     public void addEdge(DirectedEdge e) {
         adj[e.from()].add(e);
         E++;
@@ -52,5 +54,18 @@ public class EdgeWeightedDigraph {
             }
         }
         return bag;
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append(V + " " + E + NEWLINE);
+        for (int v = 0; v < V; v++) {
+            s.append(v + ": ");
+            for (DirectedEdge e : adj[v]) {
+                s.append(e + "  ");
+            }
+            s.append(NEWLINE);
+        }
+        return s.toString();
     }
 }

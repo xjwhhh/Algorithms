@@ -1,5 +1,8 @@
 package cn.edu.nju.software151250171.graph.directedgraphs;
 
+import cn.edu.nju.software151250171.graph.shortestpaths.EdgeWeightedDigraph;
+import edu.princeton.cs.algs4.EdgeWeightedDirectedCycle;
+
 /*
  * 拓扑排序
  * 当且仅当一幅有向图是无环图时他才能进行拓扑排序
@@ -9,6 +12,10 @@ package cn.edu.nju.software151250171.graph.directedgraphs;
 public class Topological {
     private Iterable<Integer> order;
 
+    public boolean hasOrder() {
+        return order != null;
+    }
+
     public Topological(Digraph G) {
         DirectedCycle cyclefinder = new DirectedCycle(G);
         if (!cyclefinder.hasCycle()) {
@@ -16,6 +23,15 @@ public class Topological {
             order = depthFirstOrder.reversePost();
         }
     }
+
+    public Topological(EdgeWeightedDigraph G) {
+//        EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G);
+//        if (!finder.hasCycle()) {
+//            DepthFirstOrder dfs = new DepthFirstOrder(G);
+//            order = dfs.reversePost();
+//        }
+    }
+
 
     //拓扑排序的所有顶点
     public Iterable<Integer> order() {
