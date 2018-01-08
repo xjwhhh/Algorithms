@@ -78,4 +78,19 @@ public class MSD {
         }
         return v.length() < w.length();
     }
+
+    //对前d个字符均相同的字符串执行插入排序，代码的效率取决于substring()方法所需的时间是否是常数
+    public static void insertSort(String[] a,int lo,int hi,int d){
+        for(int i=lo;i<hi;i++){
+            for(int j=i;j>lo&&insertLess(a[j],a[j-1],d);j--){
+                exch(a,j,j-1);
+            }
+        }
+    }
+
+    private static boolean insertLess(String v,String w,int d){
+        return v.substring(d).compareTo(w.substring(d))<0;
+    }
+
+
 }
