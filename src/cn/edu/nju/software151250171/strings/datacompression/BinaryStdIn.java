@@ -13,7 +13,8 @@ public class BinaryStdIn {
     private static boolean isInitialized;   // has BinaryStdIn been called for first time?
 
     // don't instantiate
-    private BinaryStdIn() { }
+    private BinaryStdIn() {
+    }
 
     // fill buffer
     private static void initialize() {
@@ -28,8 +29,7 @@ public class BinaryStdIn {
         try {
             buffer = in.read();
             n = 8;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("EOF");
             buffer = EOF;
             n = -1;
@@ -44,14 +44,14 @@ public class BinaryStdIn {
         try {
             in.close();
             isInitialized = false;
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new IllegalStateException("Could not close BinaryStdIn", ioe);
         }
     }
 
     /**
      * Returns true if standard input is empty.
+     *
      * @return true if and only if standard input is empty
      */
     //比特流是否为空
@@ -110,9 +110,9 @@ public class BinaryStdIn {
     /**
      * Reads the next r bits from standard input and return as an r-bit character.
      *
-     * @param  r number of bits to read.
+     * @param r number of bits to read.
      * @return the next r bits of data from standard input as a {@code char}
-     * @throws NoSuchElementException if there are fewer than {@code r} bits available on standard input
+     * @throws NoSuchElementException   if there are fewer than {@code r} bits available on standard input
      * @throws IllegalArgumentException unless {@code 1 <= r <= 16}
      */
     //读取r(1-16)位数据并返回一个char值
@@ -136,7 +136,7 @@ public class BinaryStdIn {
      *
      * @return the remaining bytes of data from standard input as a {@code String}
      * @throws NoSuchElementException if standard input is empty or if the number of bits
-     *         available on standard input is not a multiple of 8 (byte-aligned)
+     *                                available on standard input is not a multiple of 8 (byte-aligned)
      */
     public static String readString() {
         if (isEmpty()) throw new NoSuchElementException("Reading from empty input stream");
@@ -148,7 +148,6 @@ public class BinaryStdIn {
         }
         return sb.toString();
     }
-
 
     /**
      * Reads the next 16 bits from standard input and return as a 16-bit short.
@@ -185,9 +184,9 @@ public class BinaryStdIn {
     /**
      * Reads the next r bits from standard input and return as an r-bit int.
      *
-     * @param  r number of bits to read.
+     * @param r number of bits to read.
      * @return the next r bits of data from standard input as a {@code int}
-     * @throws NoSuchElementException if there are fewer than {@code r} bits available on standard input
+     * @throws NoSuchElementException   if there are fewer than {@code r} bits available on standard input
      * @throws IllegalArgumentException unless {@code 1 <= r <= 32}
      */
     public static int readInt(int r) {
@@ -221,7 +220,6 @@ public class BinaryStdIn {
         return x;
     }
 
-
     /**
      * Reads the next 64 bits from standard input and return as a 64-bit double.
      *
@@ -241,7 +239,6 @@ public class BinaryStdIn {
     public static float readFloat() {
         return Float.intBitsToFloat(readInt());
     }
-
 
     /**
      * Reads the next 8 bits from standard input and return as an 8-bit byte.

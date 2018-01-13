@@ -44,5 +44,4 @@ public class KruskalMST {
         return weight;
     }
 
-
 }

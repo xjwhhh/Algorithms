@@ -8,7 +8,8 @@ import java.awt.*;
  * 用picture对象表示比特，其中白色像素表示0，黑色像素表示1
  */
 public class PictureDump {
-    private PictureDump() { }
+    private PictureDump() {
+    }
 
     /**
      * Reads in a sequence of bytes from standard input and draws
@@ -27,9 +28,8 @@ public class PictureDump {
                 if (!BinaryStdIn.isEmpty()) {
                     boolean bit = BinaryStdIn.readBoolean();
                     if (bit) picture.set(col, row, Color.BLACK);
-                    else     picture.set(col, row, Color.WHITE);
-                }
-                else {
+                    else picture.set(col, row, Color.WHITE);
+                } else {
                     picture.set(col, row, Color.RED);
                 }
             }

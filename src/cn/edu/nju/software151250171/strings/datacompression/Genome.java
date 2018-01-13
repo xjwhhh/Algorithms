@@ -7,7 +7,8 @@ import edu.princeton.cs.algs4.Alphabet;
  */
 public class Genome {
     // Do not instantiate.
-    private Genome() { }
+    private Genome() {
+    }
 
     /**
      * Reads a sequence of 8-bit extended ASCII characters over the alphabet
@@ -46,7 +47,6 @@ public class Genome {
         BinaryStdOut.close();
     }
 
-
     /**
      * Sample client that calls {@code compress()} if the command-line
      * argument is "-" an {@code expand()} if it is "+".
@@ -54,7 +54,7 @@ public class Genome {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        if      (args[0].equals("-")) compress();
+        if (args[0].equals("-")) compress();
         else if (args[0].equals("+")) expand();
         else throw new IllegalArgumentException("Illegal command line argument");
     }

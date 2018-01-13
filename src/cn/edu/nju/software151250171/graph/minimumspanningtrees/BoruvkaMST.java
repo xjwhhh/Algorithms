@@ -1,6 +1,5 @@
 package cn.edu.nju.software151250171.graph.minimumspanningtrees;
 
-
 import cn.edu.nju.software151250171.base.Bag;
 import cn.edu.nju.software151250171.base.UF;
 import edu.princeton.cs.algs4.In;
@@ -20,6 +19,7 @@ public class BoruvkaMST {
 
     /**
      * Compute a minimum spanning tree (or forest) of an edge-weighted graph.
+     *
      * @param G the edge-weighted graph
      */
     public BoruvkaMST(EdgeWeightedGraph G) {
@@ -60,16 +60,17 @@ public class BoruvkaMST {
 
     /**
      * Returns the edges in a minimum spanning tree (or forest).
+     *
      * @return the edges in a minimum spanning tree (or forest) as
-     *    an iterable of edges
+     * an iterable of edges
      */
     public Iterable<Edge> edges() {
         return mst;
     }
 
-
     /**
      * Returns the sum of the edge weights in a minimum spanning tree (or forest).
+     *
      * @return the sum of the edge weights in a minimum spanning tree (or forest)
      */
     public double weight() {

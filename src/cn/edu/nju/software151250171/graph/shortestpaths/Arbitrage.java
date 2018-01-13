@@ -8,11 +8,12 @@ import edu.princeton.cs.algs4.StdOut;
 //首先使用完全有向图表示汇率表，然后用Bellman-Ford算法来寻找图中的负权重环
 public class Arbitrage {
     // this class cannot be instantiated
-    private Arbitrage() { }
+    private Arbitrage() {
+    }
 
     /**
-     *  Reads the currency exchange table from standard input and
-     *  prints an arbitrage opportunity to standard output (if one exists).
+     * Reads the currency exchange table from standard input and
+     * prints an arbitrage opportunity to standard output (if one exists).
      *
      * @param args the command-line arguments
      */
@@ -42,8 +43,7 @@ public class Arbitrage {
                 stake *= Math.exp(-e.weight());
                 StdOut.printf("= %10.5f %s\n", stake, name[e.to()]);
             }
-        }
-        else {
+        } else {
             StdOut.println("No arbitrage opportunity");
         }
     }

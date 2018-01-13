@@ -31,7 +31,7 @@ public class DepthFirstOrder {
     public DepthFirstOrder(EdgeWeightedDigraph G) {
         pre = new Queue<>();
         post = new Queue<>();
-        marked    = new boolean[G.V()];
+        marked = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++)
             if (!marked[v]) dfs(G, v);
     }

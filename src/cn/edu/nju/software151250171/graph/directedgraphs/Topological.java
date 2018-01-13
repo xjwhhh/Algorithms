@@ -32,7 +32,6 @@ public class Topological {
 //        }
     }
 
-
     //拓扑排序的所有顶点
     public Iterable<Integer> order() {
         return order;

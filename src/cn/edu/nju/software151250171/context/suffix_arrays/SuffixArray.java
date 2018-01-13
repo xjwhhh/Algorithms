@@ -11,6 +11,7 @@ public class SuffixArray {
 
     /**
      * Initializes a suffix array for the given {@code text} string.
+     *
      * @param text the input string
      */
     public SuffixArray(String text) {
@@ -29,9 +30,11 @@ public class SuffixArray {
             this.text = text;
             this.index = index;
         }
+
         private int length() {
             return text.length() - index;
         }
+
         private char charAt(int i) {
             return text.charAt(index + i);
         }
@@ -53,39 +56,40 @@ public class SuffixArray {
 
     /**
      * Returns the length of the input string.
+     *
      * @return the length of the input string
      */
     public int length() {
         return suffixes.length;
     }
 
-
     /**
      * Returns the index into the original string of the <em>i</em>th smallest suffix.
      * That is, {@code text.substring(sa.index(i))} is the <em>i</em>th smallest suffix.
+     *
      * @param i an integer between 0 and <em>n</em>-1
      * @return the index into the original string of the <em>i</em>th smallest suffix
      * @throws java.lang.IllegalArgumentException unless {@code 0 <= i < n}
-     * select(i)的索引
+     *                                            select(i)的索引
      */
     public int index(int i) {
         if (i < 0 || i >= suffixes.length) throw new IllegalArgumentException();
         return suffixes[i].index;
     }
 
-
     /**
      * Returns the length of the longest common prefix of the <em>i</em>th
      * smallest suffix and the <em>i</em>-1st smallest suffix.
+     *
      * @param i an integer between 1 and <em>n</em>-1
      * @return the length of the longest common prefix of the <em>i</em>th
      * smallest suffix and the <em>i</em>-1st smallest suffix.
      * @throws java.lang.IllegalArgumentException unless {@code 1 <= i < n}
-     * select(i)和select(i-1)的最长公共前缀的长度(i在1到N-1之间)
+     *                                            select(i)和select(i-1)的最长公共前缀的长度(i在1到N-1之间)
      */
     public int lcp(int i) {
         if (i < 1 || i >= suffixes.length) throw new IllegalArgumentException();
-        return lcpSuffix(suffixes[i], suffixes[i-1]);
+        return lcpSuffix(suffixes[i], suffixes[i - 1]);
     }
 
     // longest common prefix of s and t
@@ -99,6 +103,7 @@ public class SuffixArray {
 
     /**
      * Returns the <em>i</em>th smallest suffix as a string.
+     *
      * @param i the index
      * @return the <em>i</em> smallest suffix as a string
      * @throws java.lang.IllegalArgumentException unless {@code 0 <= i < n}
@@ -112,6 +117,7 @@ public class SuffixArray {
      * Returns the number of suffixes strictly less than the {@code query} string.
      * We note that {@code rank(select(i))} equals {@code i} for each {@code i}
      * between 0 and <em>n</em>-1.
+     *
      * @param query the query string
      * @return the number of suffixes strictly less than {@code query}
      * 小于键key的后缀数量

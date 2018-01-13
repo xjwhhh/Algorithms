@@ -13,7 +13,7 @@ public class Brute {
         for (int i = 0; i <= n - m; i++) {
             int j;
             for (j = 0; j < m; j++) {
-                if (txt.charAt(i+j) != pat.charAt(j))
+                if (txt.charAt(i + j) != pat.charAt(j))
                     break;
             }
             if (j == m) return i;            // found at offset i
@@ -36,6 +36,6 @@ public class Brute {
             }
         }
         if (j == m) return i - m;    // found
-        else        return n;        // not found
+        else return n;        // not found
     }
 }

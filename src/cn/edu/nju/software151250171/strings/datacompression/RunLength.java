@@ -6,11 +6,12 @@ package cn.edu.nju.software151250171.strings.datacompression;
  * 随着分辨率的提高，游程编码的效果也会大大提高
  */
 public class RunLength {
-    private static final int R    = 256;
+    private static final int R = 256;
     private static final int LG_R = 8;
 
     // Do not instantiate.
-    private RunLength() { }
+    private RunLength() {
+    }
 
     /**
      * Reads a sequence of bits from standard input (that are encoded
@@ -47,7 +48,7 @@ public class RunLength {
             }
             //如果与上一个比特相同且计数器已达到最大值，则写入最大值，再写入一个0计数值，然后将计数值归零
             else {
-                if (run == R-1) {
+                if (run == R - 1) {
                     BinaryStdOut.write(run, LG_R);
                     run = 0;
                     BinaryStdOut.write(run, LG_R);
@@ -60,7 +61,6 @@ public class RunLength {
         BinaryStdOut.close();
     }
 
-
     /**
      * Sample client that calls {@code compress()} if the command-line
      * argument is "-" an {@code expand()} if it is "+".
@@ -68,7 +68,7 @@ public class RunLength {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        if      (args[0].equals("-")) compress();
+        if (args[0].equals("-")) compress();
         else if (args[0].equals("+")) expand();
         else throw new IllegalArgumentException("Illegal command line argument");
     }

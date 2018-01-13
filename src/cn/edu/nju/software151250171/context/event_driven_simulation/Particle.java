@@ -18,17 +18,16 @@ public class Particle {
     private final double mass;    // mass 质量
     private final Color color;    // color 颜色
 
-
     /**
      * Initializes a particle with the specified position, velocity, radius, mass, and color.
      *
-     * @param  rx <em>x</em>-coordinate of position
-     * @param  ry <em>y</em>-coordinate of position
-     * @param  vx <em>x</em>-coordinate of velocity
-     * @param  vy <em>y</em>-coordinate of velocity
-     * @param  radius the radius
-     * @param  mass the mass
-     * @param  color the color
+     * @param rx     <em>x</em>-coordinate of position
+     * @param ry     <em>y</em>-coordinate of position
+     * @param vx     <em>x</em>-coordinate of velocity
+     * @param vy     <em>y</em>-coordinate of velocity
+     * @param radius the radius
+     * @param mass   the mass
+     * @param color  the color
      */
     public Particle(double rx, double ry, double vx, double vy, double radius, double mass, Color color) {
         this.vx = vx;
@@ -36,8 +35,8 @@ public class Particle {
         this.rx = rx;
         this.ry = ry;
         this.radius = radius;
-        this.mass   = mass;
-        this.color  = color;
+        this.mass = mass;
+        this.color = color;
     }
 
     /**
@@ -46,13 +45,13 @@ public class Particle {
      * either direciton is chosen uniformly at random.
      */
     public Particle() {
-        rx     = StdRandom.uniform(0.0, 1.0);
-        ry     = StdRandom.uniform(0.0, 1.0);
-        vx     = StdRandom.uniform(-0.005, 0.005);
-        vy     = StdRandom.uniform(-0.005, 0.005);
+        rx = StdRandom.uniform(0.0, 1.0);
+        ry = StdRandom.uniform(0.0, 1.0);
+        vx = StdRandom.uniform(-0.005, 0.005);
+        vy = StdRandom.uniform(-0.005, 0.005);
         radius = 0.01;
-        mass   = 0.5;
-        color  = Color.BLACK;
+        mass = 0.5;
+        color = Color.BLACK;
     }
 
     /**
@@ -60,7 +59,7 @@ public class Particle {
      * for the specified amount of time.
      * 根据时间的流逝dt改变粒子的位置
      *
-     * @param  dt the amount of time
+     * @param dt the amount of time
      */
     public void move(double dt) {
         rx += vx * dt;
@@ -84,7 +83,7 @@ public class Particle {
      * {@link #bounceOffHorizontalWall}.
      *
      * @return the number of collisions involving this particle with
-     *         vertical walls, horizontal walls, or other particles
+     * vertical walls, horizontal walls, or other particles
      */
     public int count() {
         return count;
@@ -95,23 +94,23 @@ public class Particle {
      * particle, assuming no interening collisions.
      * 距离该粒子和粒子that碰撞所需的时间
      *
-     * @param  that the other particle
+     * @param that the other particle
      * @return the amount of time for this particle to collide with the specified
-     *         particle, assuming no interening collisions;
-     *         {@code Double.POSITIVE_INFINITY} if the particles will not collide
+     * particle, assuming no interening collisions;
+     * {@code Double.POSITIVE_INFINITY} if the particles will not collide
      */
     public double timeToHit(Particle that) {
         if (this == that) return INFINITY;
-        double dx  = that.rx - this.rx;
-        double dy  = that.ry - this.ry;
+        double dx = that.rx - this.rx;
+        double dy = that.ry - this.ry;
         double dvx = that.vx - this.vx;
         double dvy = that.vy - this.vy;
-        double dvdr = dx*dvx + dy*dvy;
+        double dvdr = dx * dvx + dy * dvy;
         if (dvdr > 0) return INFINITY;
-        double dvdv = dvx*dvx + dvy*dvy;
-        double drdr = dx*dx + dy*dy;
+        double dvdv = dvx * dvx + dvy * dvy;
+        double drdr = dx * dx + dy * dy;
         double sigma = this.radius + that.radius;
-        double d = (dvdr*dvdr) - dvdv * (drdr - sigma*sigma);
+        double d = (dvdr * dvdr) - dvdv * (drdr - sigma * sigma);
         // if (drdr < sigma*sigma) StdOut.println("overlapping particles");
         if (d < 0) return INFINITY;
         return -(dvdr + Math.sqrt(d)) / dvdv;
@@ -123,14 +122,14 @@ public class Particle {
      * 距离该粒子和垂直的墙体碰撞所需的时间
      *
      * @return the amount of time for this particle to collide with a vertical wall,
-     *         assuming no interening collisions;
-     *         {@code Double.POSITIVE_INFINITY} if the particle will not collide
-     *         with a vertical wall
+     * assuming no interening collisions;
+     * {@code Double.POSITIVE_INFINITY} if the particle will not collide
+     * with a vertical wall
      */
     public double timeToHitVerticalWall() {
-        if      (vx > 0) return (1.0 - rx - radius) / vx;
+        if (vx > 0) return (1.0 - rx - radius) / vx;
         else if (vx < 0) return (radius - rx) / vx;
-        else             return INFINITY;
+        else return INFINITY;
     }
 
     /**
@@ -139,14 +138,14 @@ public class Particle {
      * 距离该粒子和水平的墙体碰撞所需的时间
      *
      * @return the amount of time for this particle to collide with a horizontal wall,
-     *         assuming no interening collisions;
-     *         {@code Double.POSITIVE_INFINITY} if the particle will not collide
-     *         with a horizontal wall
+     * assuming no interening collisions;
+     * {@code Double.POSITIVE_INFINITY} if the particle will not collide
+     * with a horizontal wall
      */
     public double timeToHitHorizontalWall() {
-        if      (vy > 0) return (1.0 - ry - radius) / vy;
+        if (vy > 0) return (1.0 - ry - radius) / vy;
         else if (vy < 0) return (radius - ry) / vy;
-        else             return INFINITY;
+        else return INFINITY;
     }
 
     /**
@@ -155,14 +154,14 @@ public class Particle {
      * at this instant.
      * 碰撞后该粒子的速度
      *
-     * @param  that the other particle
+     * @param that the other particle
      */
     public void bounceOff(Particle that) {
-        double dx  = that.rx - this.rx;
-        double dy  = that.ry - this.ry;
+        double dx = that.rx - this.rx;
+        double dy = that.ry - this.ry;
         double dvx = that.vx - this.vx;
         double dvy = that.vy - this.vy;
-        double dvdr = dx*dvx + dy*dvy;             // dv dot dr
+        double dvdr = dx * dvx + dy * dvy;             // dv dot dr
         double dist = this.radius + that.radius;   // distance between particle centers at collison
 
         // magnitude of normal force
@@ -213,6 +212,6 @@ public class Particle {
      * @return the kinetic energy of this particle
      */
     public double kineticEnergy() {
-        return 0.5 * mass * (vx*vx + vy*vy);
+        return 0.5 * mass * (vx * vx + vy * vy);
     }
 }

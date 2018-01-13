@@ -7,7 +7,8 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class HexDump {
     // Do not instantiate.
-    private HexDump() { }
+    private HexDump() {
+    }
 
     /**
      * Reads in a sequence of bytes from standard input and writes
@@ -37,6 +38,6 @@ public class HexDump {
             StdOut.printf("%02x", c & 0xff);
         }
         if (bytesPerLine != 0) StdOut.println();
-        StdOut.println((i*8) + " bits");
+        StdOut.println((i * 8) + " bits");
     }
 }

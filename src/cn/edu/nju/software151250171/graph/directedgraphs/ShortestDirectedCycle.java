@@ -5,8 +5,8 @@ import cn.edu.nju.software151250171.base.Stack;
 /**
  * Finds a shortest directed cycle in a digraph.
  * Runs in O(V * (E + V)) time.
- *  run BFS from each vertex s.
- *  The shortest cycle through s is an edge v->s, plus a shortest path from s to v.
+ * run BFS from each vertex s.
+ * The shortest cycle through s is an edge v->s, plus a shortest path from s to v.
  */
 public class ShortestDirectedCycle {
     private Stack<Integer> cycle;    // directed cycle (or null if no such cycle)

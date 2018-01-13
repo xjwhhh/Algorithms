@@ -11,6 +11,7 @@ public class AcyclicLP {
     /**
      * Computes a longest paths tree from {@code s} to every other vertex in
      * the directed acyclic graph {@code G}.
+     *
      * @param G the acyclic digraph
      * @param s the source vertex
      * @throws IllegalArgumentException if the digraph is not acyclic
@@ -47,9 +48,10 @@ public class AcyclicLP {
 
     /**
      * Returns the length of a longest path from the source vertex {@code s} to vertex {@code v}.
-     * @param  v the destination vertex
+     *
+     * @param v the destination vertex
      * @return the length of a longest path from the source vertex {@code s} to vertex {@code v};
-     *         {@code Double.NEGATIVE_INFINITY} if no such path
+     * {@code Double.NEGATIVE_INFINITY} if no such path
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public double distTo(int v) {
@@ -59,9 +61,10 @@ public class AcyclicLP {
 
     /**
      * Is there a path from the source vertex {@code s} to vertex {@code v}?
-     * @param  v the destination vertex
+     *
+     * @param v the destination vertex
      * @return {@code true} if there is a path from the source vertex
-     *         {@code s} to vertex {@code v}, and {@code false} otherwise
+     * {@code s} to vertex {@code v}, and {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public boolean hasPathTo(int v) {
@@ -71,9 +74,10 @@ public class AcyclicLP {
 
     /**
      * Returns a longest path from the source vertex {@code s} to vertex {@code v}.
-     * @param  v the destination vertex
+     *
+     * @param v the destination vertex
      * @return a longest path from the source vertex {@code s} to vertex {@code v}
-     *         as an iterable of edges, and {@code null} if no such path
+     * as an iterable of edges, and {@code null} if no such path
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public Iterable<DirectedEdge> pathTo(int v) {
@@ -90,6 +94,6 @@ public class AcyclicLP {
     private void validateVertex(int v) {
         int V = distTo.length;
         if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 }

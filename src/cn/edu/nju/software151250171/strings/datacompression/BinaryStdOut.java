@@ -10,7 +10,8 @@ public class BinaryStdOut {
     private static boolean isInitialized;     // has BinaryStdOut been called for first time?
 
     // don't instantiate
-    private BinaryStdOut() { }
+    private BinaryStdOut() {
+    }
 
     // initialize BinaryStdOut
     private static void initialize() {
@@ -47,8 +48,7 @@ public class BinaryStdOut {
         if (n == 0) {
             try {
                 out.write(x);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return;
@@ -69,8 +69,7 @@ public class BinaryStdOut {
         if (n > 0) buffer <<= (8 - n);
         try {
             out.write(buffer);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         n = 0;
@@ -85,8 +84,7 @@ public class BinaryStdOut {
         clearBuffer();
         try {
             out.flush();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -102,15 +100,14 @@ public class BinaryStdOut {
         try {
             out.close();
             isInitialized = false;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     /**
      * Writes the specified bit to standard output.
+     *
      * @param x the {@code boolean} to write.
      */
     //写入指定的比特
@@ -120,6 +117,7 @@ public class BinaryStdOut {
 
     /**
      * Writes the 8-bit byte to standard output.
+     *
      * @param x the {@code byte} to write.
      */
     public static void write(byte x) {
@@ -128,17 +126,19 @@ public class BinaryStdOut {
 
     /**
      * Writes the 32-bit int to standard output.
+     *
      * @param x the {@code int} to write.
      */
     public static void write(int x) {
         writeByte((x >>> 24) & 0xff);
         writeByte((x >>> 16) & 0xff);
-        writeByte((x >>>  8) & 0xff);
-        writeByte((x >>>  0) & 0xff);
+        writeByte((x >>> 8) & 0xff);
+        writeByte((x >>> 0) & 0xff);
     }
 
     /**
      * Writes the r-bit int to standard output.
+     *
      * @param x the {@code int} to write.
      * @param r the number of relevant bits in the char.
      * @throws IllegalArgumentException if {@code r} is not between 1 and 32.
@@ -149,7 +149,7 @@ public class BinaryStdOut {
             write(x);
             return;
         }
-        if (r < 1 || r > 32)        throw new IllegalArgumentException("Illegal value for r = " + r);
+        if (r < 1 || r > 32) throw new IllegalArgumentException("Illegal value for r = " + r);
         if (x < 0 || x >= (1 << r)) throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
         for (int i = 0; i < r; i++) {
             boolean bit = ((x >>> (r - i - 1)) & 1) == 1;
@@ -157,12 +157,9 @@ public class BinaryStdOut {
         }
     }
 
-
-
-
-
     /**
      * Writes the 64-bit double to standard output.
+     *
      * @param x the {@code double} to write.
      */
     public static void write(double x) {
@@ -171,6 +168,7 @@ public class BinaryStdOut {
 
     /**
      * Writes the 64-bit long to standard output.
+     *
      * @param x the {@code long} to write.
      */
     public static void write(long x) {
@@ -180,12 +178,13 @@ public class BinaryStdOut {
         writeByte((int) ((x >>> 32) & 0xff));
         writeByte((int) ((x >>> 24) & 0xff));
         writeByte((int) ((x >>> 16) & 0xff));
-        writeByte((int) ((x >>>  8) & 0xff));
-        writeByte((int) ((x >>>  0) & 0xff));
+        writeByte((int) ((x >>> 8) & 0xff));
+        writeByte((int) ((x >>> 0) & 0xff));
     }
 
     /**
      * Writes the 32-bit float to standard output.
+     *
      * @param x the {@code float} to write.
      */
     public static void write(float x) {
@@ -194,15 +193,17 @@ public class BinaryStdOut {
 
     /**
      * Writes the 16-bit int to standard output.
+     *
      * @param x the {@code short} to write.
      */
     public static void write(short x) {
-        writeByte((x >>>  8) & 0xff);
-        writeByte((x >>>  0) & 0xff);
+        writeByte((x >>> 8) & 0xff);
+        writeByte((x >>> 0) & 0xff);
     }
 
     /**
      * Writes the 8-bit char to standard output.
+     *
      * @param x the {@code char} to write.
      * @throws IllegalArgumentException if {@code x} is not betwen 0 and 255.
      */
@@ -213,6 +214,7 @@ public class BinaryStdOut {
 
     /**
      * Writes the r-bit char to standard output.
+     *
      * @param x the {@code char} to write.
      * @param r the number of relevant bits in the char.
      * @throws IllegalArgumentException if {@code r} is not between 1 and 16.
@@ -224,7 +226,7 @@ public class BinaryStdOut {
             return;
         }
         if (r < 1 || r > 16) throw new IllegalArgumentException("Illegal value for r = " + r);
-        if (x >= (1 << r))   throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+        if (x >= (1 << r)) throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
         for (int i = 0; i < r; i++) {
             boolean bit = ((x >>> (r - i - 1)) & 1) == 1;
             writeBit(bit);
@@ -233,9 +235,10 @@ public class BinaryStdOut {
 
     /**
      * Writes the string of 8-bit characters to standard output.
+     *
      * @param s the {@code String} to write.
      * @throws IllegalArgumentException if any character in the string is not
-     * between 0 and 255.
+     *                                  between 0 and 255.
      */
     public static void write(String s) {
         for (int i = 0; i < s.length(); i++)
@@ -244,11 +247,12 @@ public class BinaryStdOut {
 
     /**
      * Writes the string of r-bit characters to standard output.
+     *
      * @param s the {@code String} to write.
      * @param r the number of relevants bits in each character.
      * @throws IllegalArgumentException if r is not between 1 and 16.
      * @throws IllegalArgumentException if any character in the string is not
-     * between 0 and 2<sup>r</sup> - 1.
+     *                                  between 0 and 2<sup>r</sup> - 1.
      */
     public static void write(String s, int r) {
         for (int i = 0; i < s.length(); i++)

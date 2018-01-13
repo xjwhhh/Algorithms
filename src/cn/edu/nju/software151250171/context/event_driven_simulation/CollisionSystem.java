@@ -7,14 +7,14 @@ public class CollisionSystem {
     private final static double HZ = 0.5;    // number of redraw events per clock tick
 
     private MinPQ<Event> pq;          // the priority queue 优先队列
-    private double t  = 0.0;          // simulation clock time 模拟时钟,相当于当前时间
+    private double t = 0.0;          // simulation clock time 模拟时钟,相当于当前时间
     private Particle[] particles;     // the array of particles 粒子数组
 
     /**
      * Initializes a system with the specified collection of particles.
      * The individual particles will be mutated during the simulation.
      *
-     * @param  particles the array of particles
+     * @param particles the array of particles
      */
     public CollisionSystem(Particle[] particles) {
         this.particles = particles.clone();   // defensive copy
@@ -52,11 +52,10 @@ public class CollisionSystem {
         }
     }
 
-
     /**
      * Simulates the system of particles for the specified amount of time.
      *
-     * @param  limit the amount of time
+     * @param limit the amount of time
      */
     public void simulate(double limit) {
 
@@ -67,7 +66,6 @@ public class CollisionSystem {
             predict(particles[i], limit);
         }
         pq.insert(new Event(0, null, null));        // redraw event
-
 
         // the main event-driven simulation loop
         while (!pq.isEmpty()) {
@@ -85,7 +83,7 @@ public class CollisionSystem {
             t = e.time;
 
             // process event 更新所有参加碰撞的粒子速度
-            if      (a != null && b != null) a.bounceOff(b);              // particle-particle collision
+            if (a != null && b != null) a.bounceOff(b);              // particle-particle collision
             else if (a != null && b == null) a.bounceOffVerticalWall();   // particle-wall collision
             else if (a == null && b != null) b.bounceOffHorizontalWall(); // particle-wall collision
             else if (a == null && b == null) redraw(limit);               // redraw event
@@ -96,7 +94,6 @@ public class CollisionSystem {
             predict(b, limit);
         }
     }
-
 
     /***************************************************************************
      *  An event during a particle collision simulation. Each event contains

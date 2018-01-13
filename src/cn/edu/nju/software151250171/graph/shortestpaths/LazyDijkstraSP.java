@@ -1,6 +1,5 @@
 package cn.edu.nju.software151250171.graph.shortestpaths;
 
-
 import cn.edu.nju.software151250171.base.Stack;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
@@ -62,7 +61,6 @@ public class LazyDijkstraSP {
             }
         }
     }
-
 
     // length of shortest path from s to v, infinity if unreachable
     public double distTo(int v) {
